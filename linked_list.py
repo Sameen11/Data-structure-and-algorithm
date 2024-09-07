@@ -128,6 +128,23 @@ class LinkedList:
             itr = itr.next
         return count
 
+    def insert_at_index(self, index, data):
+        if index < 0 or index > self.get_total():
+            raise Exception("invalid index")
+
+        if index == 0:
+            self.insert_at_begin(data)
+            return
+        count = 0
+        itr = self.head
+        while itr.next:
+            if count == index - 1:
+                new_node = Node(data)
+                itr.next = new_node
+                break
+            itr = itr.next
+            count += 1
+
 
 if __name__ == '__main__':
     ll = LinkedList()
@@ -144,6 +161,8 @@ if __name__ == '__main__':
     ll.delete_last()
 
     ll.delete_node_value(2)
+
+    ll.insert_at_index(1, 5)
 
     ll.print_list()
     total = ll.get_total()
